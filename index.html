@@ -1,1 +1,563 @@
+```html
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ნათიას საიდუმლო აპი 💜</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at center, #4b0870, #180022 45%, #050007);
+}
+
+/* ჰაკერული ფონი */
+
+.matrix {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    color: #c83cff;
+    opacity: .12;
+
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 20px;
+
+    overflow: hidden;
+    word-break: break-all;
+}
+
+/* მთავარი კონტეინერი */
+
+.app {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
+    width: 90%;
+    max-width: 430px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background: rgba(25, 0, 40, .88);
+
+    border: 1px solid #d55cff;
+    border-radius: 25px;
+
+    box-shadow:
+        0 0 15px #a900ff,
+        0 0 50px rgba(190, 0, 255, .45);
+
+    backdrop-filter: blur(10px);
+}
+
+/* სათაური */
+
+h1 {
+    color: #edb1ff;
+
+    text-shadow:
+        0 0 5px #d000ff,
+        0 0 15px #a000ff,
+        0 0 30px #8500ff;
+}
+
+.subtitle {
+    color: #d9a5ef;
+}
+
+/* Hello Kitty-ის ნამდვილი ფოტო */
+
+.kitty {
+    width: 220px;
+    height: 220px;
+
+    margin: 25px auto;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border: 4px solid #ff8cff;
+
+    box-shadow:
+        0 0 15px #ff50ff,
+        0 0 35px #b000ff,
+        0 0 70px rgba(200, 0, 255, .5);
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.kitty:hover {
+    transform: scale(1.06);
+}
+
+.kitty:active {
+    transform: scale(.94);
+}
+
+.kitty img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+/* დამალვა */
+
+.hidden {
+    display: none;
+}
+
+/* IP ბლოკი */
+
+.info {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,.45);
+
+    border: 1px solid #8d35b4;
+}
+
+.ip {
+    margin-top: 10px;
+
+    color: #e7a8ff;
+
+    font-family: monospace;
+
+    font-size: 21px;
+
+    text-shadow: 0 0 10px #bd35ff;
+}
+
+/* ვერიფიკაცია */
+
+.verification {
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    color: #5dff9a;
+
+    background: rgba(0,255,100,.08);
+
+    border: 1px solid #24ff70;
+
+    box-shadow: 0 0 15px rgba(0,255,100,.25);
+}
+
+.check {
+    display: inline-flex;
+
+    width: 23px;
+    height: 23px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background: #20e66b;
+
+    color: #06200e;
+
+    font-weight: bold;
+}
+
+/* ღილაკი */
+
+button {
+    margin-top: 20px;
+
+    padding: 13px 30px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        90deg,
+        #8b00ff,
+        #d23cff
+    );
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 10px #9d00ff,
+        0 0 25px rgba(180,0,255,.5);
+
+    transition: .2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ყვავილები */
+
+.flower {
+    position: fixed;
+
+    top: -80px;
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    animation: fall linear forwards;
+
+    filter: drop-shadow(0 0 7px #ff7cff);
+}
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translateY(-100px)
+            translateX(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(80px)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(-80px)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+/* საბოლოო ტექსტი */
+
+.final-title {
+    color: #ffb5ff;
+
+    text-shadow:
+        0 0 10px #ff40ff,
+        0 0 30px #b000ff;
+}
+
+.small {
+    color: #b982c9;
+    font-size: 13px;
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- ჰაკერული ფონური ტექსტი -->
+<div class="matrix" id="matrix"></div>
+
+
+<div class="app">
+
+<div class="panel">
+
+
+<!-- ========================= -->
+<!-- პირველი ეკრანი -->
+<!-- ========================= -->
+
+<div id="welcome">
+
+    <h1>💜 მოგესალმებით ნათია 💜</h1>
+
+    <p class="subtitle">
+        გაგრძელებისთვის დააჭირეთ ფოტოს
+    </p>
+
+
+    <!-- ნამდვილი Hello Kitty ფოტო -->
+
+    <div class="kitty" onclick="openSecurity()">
+
+        <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Hello%20kitty.jpg"
+            alt="Hello Kitty"
+        >
+
+    </div>
+
+
+    <p class="small">
+        SYSTEM ACCESS READY...
+    </p>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- მეორე ეკრანი -->
+<!-- ========================= -->
+
+<div id="security" class="hidden">
+
+    <h1>🔐 სისტემის შემოწმება</h1>
+
+    <p class="subtitle">
+        უსაფრთხოების შემოწმება დასრულებულია
+    </p>
+
+
+    <div class="info">
+
+        <div>
+            ფიქტიური IP მისამართი:
+        </div>
+
+        <div class="ip">
+            185.20.14.73
+        </div>
+
+
+        <div class="verification">
+
+            <span class="check">✓</span>
+
+            ადამიანი დადასტურებულია
+
+            <br>
+
+            <small>
+                BOT CHECK PASSED
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <button onclick="startFlowers()">
+        გაგრძელება 💜
+    </button>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- საბოლოო ეკრანი -->
+<!-- ========================= -->
+
+<div id="final" class="hidden">
+
+    <h1 class="final-title">
+        🌸 მზადაა! 🌸
+    </h1>
+
+    <p>
+        ჰელლო კიტიმ ყვავილები გამოგიგზავნა!
+    </p>
+
+
+    <!-- ისევ ნამდვილი ფოტო -->
+
+    <div class="kitty">
+
+        <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Hello%20kitty.jpg"
+            alt="Hello Kitty"
+        >
+
+    </div>
+
+</div>
+
+
+</div>
+</div>
+
+
+
+<script>
+
+/* =========================
+   ეკრანზე გადასვლა
+========================= */
+
+function openSecurity() {
+
+    document
+        .getElementById("welcome")
+        .classList.add("hidden");
+
+    document
+        .getElementById("security")
+        .classList.remove("hidden");
+}
+
+
+/* =========================
+   ყვავილების გაშვება
+========================= */
+
+function startFlowers() {
+
+    document
+        .getElementById("security")
+        .classList.add("hidden");
+
+    document
+        .getElementById("final")
+        .classList.remove("hidden");
+
+
+    createFlowers(80);
+}
+
+
+/* =========================
+   ყვავილების შექმნა
+========================= */
+
+function createFlowers(amount) {
+
+    const flowers = [
+        "🌸",
+        "🌺",
+        "🌷",
+        "🌹",
+        "🌼",
+        "🌻",
+        "💐"
+    ];
+
+
+    for (let i = 0; i < amount; i++) {
+
+        const flower =
+            document.createElement("div");
+
+
+        flower.className = "flower";
+
+
+        flower.innerText =
+            flowers[
+                Math.floor(
+                    Math.random() * flowers.length
+                )
+            ];
+
+
+        flower.style.left =
+            Math.random() * 100 + "vw";
+
+
+        flower.style.fontSize =
+            (20 + Math.random() * 35) + "px";
+
+
+        flower.style.animationDuration =
+            (3 + Math.random() * 5) + "s";
+
+
+        flower.style.animationDelay =
+            Math.random() * 2 + "s";
+
+
+        document.body.appendChild(flower);
+
+
+        setTimeout(() => {
+
+            flower.remove();
+
+        }, 10000);
+
+    }
+}
+
+
+/* =========================
+   ჰაკერული ფონური ტექსტი
+========================= */
+
+const matrix =
+    document.getElementById("matrix");
+
+
+let code = "";
+
+const chars =
+    "010101010101 ACCESS NATIA HELLO KITTY SYSTEM 0101";
+
+
+for (let i = 0; i < 5000; i++) {
+
+    code +=
+        chars[
+            Math.floor(
+                Math.random() * chars.length
+            )
+        ];
+
+    if (i % 100 === 0) {
+        code += "<br>";
+    }
+}
+
+
+matrix.innerHTML = code;
+
+</script>
+
+</body>
+</html>
+```
 
